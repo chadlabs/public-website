@@ -38,6 +38,10 @@ const config: GatsbyConfig = {
             name: `LinkedIn`,
             url: `https://www.linkedin.com/in/chadjhanson/`,
           },
+          {
+            name: `Photography`,
+            url: `https://chadh.smugmug.com/`,
+          },
         ],
       },
     },
@@ -104,6 +108,35 @@ const config: GatsbyConfig = {
         analyzerMode: `static`,
         reportFilename: `_bundle.html`,
         openAnalyzer: false,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-google-gtag`,
+      options: {
+        // You can add multiple tracking ids and a pageview event will be fired for all of them.
+        trackingIds: [
+          "G-JCE5VW2DYD", // Google Analytics / GA
+        ],
+        // This object gets passed directly to the gtag config command
+        // This config will be shared across all trackingIds
+        gtagConfig: {
+          optimize_id: "OPT_CONTAINER_ID",
+          anonymize_ip: true,
+          cookie_expires: 0,
+        },
+        // This object is used for configuration specific to this plugin
+        pluginConfig: {
+          // Puts tracking script in the head instead of the body
+          head: false,
+          // Setting this parameter is also optional
+          respectDNT: true,
+          // Avoids sending pageview hits from custom paths
+          exclude: ["/preview/**", "/do-not-track/me/too/"],
+          // Defaults to https://www.googletagmanager.com
+          origin: "chadlabs.net",
+          // Delays processing pageview events on route update (in milliseconds)
+          delayOnRouteUpdate: 0,
+        },
       },
     },
   ].filter(Boolean) as Array<PluginRef>,
